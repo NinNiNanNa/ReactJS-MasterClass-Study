@@ -375,7 +375,9 @@
   }
   ```
 
+  ### dark 모드 & light 모드
+
   <p align="center">
-    <img src="./public/8.png" width="500" />
-    <img src="./public/9.png" width="500" />
+    <img src="./public/8.png" width="400" />
+    <img src="./public/9.png" width="400" />
   </p>
