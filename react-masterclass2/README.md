@@ -188,8 +188,51 @@
 
 > ### ?? [ Null 병합 연산자 (Nullish coalescing operator)]
 >
-> ?? 앞에 값이 null이거나 undefined이면 오른쪽 값을, 그렇지 않으면 왼쪽 값을 반환하는 논리연산자
+> ?? 앞에 값이 null이거나 undefined이면 오른쪽 값을, 그렇지 않으면 왼쪽 값을 반환하는 논리연산자  
+> &nbsp;
 
 ### 실행결과
 
 <img src="./public/6.png" width="300" />
+
+- defalut 값 주는 방법 (TypeScript가 아니라 ES6JS문법이다.)  
+   => 만약 text props가 존재하지 않는다면 default text를 표출
+
+  ### `App.tsx`
+
+  ```javascript
+  function App() {
+    return (
+      <div>
+        <Circle borderColor="black" bgColor="teal" />
+        <Circle text="im here" bgColor="tomato" />
+      </div>
+    );
+  }
+  ```
+
+  ### `Circle.tsx`
+
+  ```javascript
+  interface CircleProps {
+    bgColor: string;
+    borderColor?: string;
+    text?: string;
+  }
+
+  function Circle({
+    bgColor,
+    borderColor,
+    text = "default text",
+  }: CircleProps) {
+    return (
+      <Container bgColor={bgColor} borderColor={borderColor ?? bgColor}>
+        {text}
+      </Container>
+    );
+  }
+  ```
+
+### 실행결과
+
+<img src="./public/7.png" width="300" />
