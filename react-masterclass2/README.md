@@ -1,4 +1,4 @@
-# #3.0 TypeScript
+# #3.0 ~ #3.7 TypeScript
 
 > ### TypeScript
 >
@@ -236,3 +236,159 @@
 ### 실행결과
 
 <img src="./public/7.png" width="300" />
+
+## State
+
+<img src="./public/8.png" width="600" />
+
+- TypeScript 는 초기값을 기반으로 state의 타입을 추측할 수 있다.
+- 위 사진처럼 초기값이 0인 number타입으로 추측되어 string타입("hello")을 보내면 에러 발생
+
+### `꺾쇠 괄호(<>)` 를 통해서 state의 타입을 지정할 수 있다.
+
+<img src="./public/9.png" width="600" />
+
+- number, string 타입으로 설정했기때문에 boolean타입(true)을 보내면 에러 발생
+
+> #### 💡 참고
+>
+> 일반적으로는 초기값을 지정하면 TypeScript 가 자동으로 타입을 유추하기 때문에 굳이 지정해주지 않아도 되지만 상태가 `undefined` 또는 `null` 이 될 수도 있거나 `객체` 또는 `배열` 일때는 지정해주는 것이 좋다.  
+> ex) `const [ value, setValue ] = useState< Value | null >(null);`  
+> &nbsp;
+
+## Forms
+
+<img src="./public/10.png" width="600" />
+
+- useState 를 만들어서 input의 value를 state의 value로 할당해준다.
+- onChange 함수를 만들어서 input의 onChange 이벤트와 연결해준다.
+- onChange 함수에서 원하는 건, event 에 접근!  
+  하지만 위 사진처럼 event 는 `any타입`이라 한다.  
+  `any타입` 은 TypeScript의 타입이며 무엇이든 될 수 있다는 걸 뜻한다.  
+  그러므로 `any타입을 제외하고 무슨 타입인지를 정하거나 설명`해야한다.
+
+<img src="./public/12.png" width="600" />
+
+- 위와 같이 매개변수 event의 타입을 정의한다. (위와 같은 TS문법은 혼자 찾아내기 어려우니 문서를 읽거나 구글링)  
+  [ 공식문서 - SyntheticEvent (합성 이벤트) ](https://legacy.reactjs.org/docs/events.html)
+- `event: React.FormEvent<HTMLInputElement>`  
+  : React의 FormEvent 내에서 InputElement 가 onChange 이벤트를 발생시키는 것
+- JavaScript 에서는 `event.target.value` 이지만 TypeScript 에서는 `event.currentTarget.value`를 사용한다.
+
+<img src="./public/11.png" width="450" />
+
+> #### 💡 참고
+>
+> ```javascript
+> const {
+>   currentTarget: { value },
+> } = event;
+> ```
+>
+> - ES6문법으로 event안 currentTarget안에 value의 값을 기존 이름 그대로 value 라는 변수를 만드는 것이다.
+> - `const value = event.currentTarget.value` 와 같다.
+> - 저런 형태는 여러개를 쓸때 장점을 발휘한다.
+>
+>   - currentTarget안에서 value, tagName, width, id 4개를 가져오고 싶다면?
+>
+>     ```javascript
+>     const value = event.currentTarget.value;
+>     const tagName = event.currentTarget.tagName;
+>     const width = event.currentTarget.width;
+>     const id = event.currentTarget.id;
+>     // ES6문법으로 정리
+>     const {
+>       currentTarget: { value, tagName, width, id },
+>     } = event;
+>     ```
+
+## Themes
+
+[styled-components - TypeScript](https://styled-components.com/docs/api#typescript)
+
+### 1. 선언 파일 생성
+
+- src 폴더안에 `styled.d.ts` 파일을 생성한다. (d.ts 는 declaration file 이라는 뜻.)
+- 아래 코드를 붙여넣는다.
+- `DefaultTheme interface` 안의 내용은 테마가 어떻게 보일지 설명할 부분이다.
+
+  ```javascript
+  // import original module declarations
+  import 'styled-components';
+
+
+  // and extend them!
+  declare module 'styled-components' {
+    export interface DefaultTheme {
+      borderRadius: string;
+
+
+      colors: {
+        main: string;
+        secondary: string;
+      };
+    }
+  }
+  ```
+
+  <img src="./public/13.png" width="500" />
+
+### 2. 테마를 만들 파일 생성
+
+- src 폴더안에 `theme.ts` 파일을 생성한다.
+- 라이트모드와 다크모드일때의 배경색, 폰트색, 버튼색을 설정한다.
+- DefaultTheme에서는 btnColor 속성이 있기 때문에 위와 같이 btnColor를 속성을 넣지 않으면 TypeScript는 오류를 나타내고 실수를 잡아낼 수 있다.
+
+  <img src="./public/14.png" width="500" />
+
+### 3. 만든 테마 적용
+
+- 2에서 만든 테마를 `index.tsx` 에 적용한다.
+
+  ```javascript
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import App from "./App";
+  import { ThemeProvider } from "styled-components";
+  import { darkTheme, lightTheme } from "./theme";
+
+  const root = ReactDOM.createRoot(
+    document.getElementById("root") as HTMLElement
+  );
+  root.render(
+    <React.StrictMode>
+      <ThemeProvider theme={darkTheme}>
+        <App />
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+  ```
+
+- `App.tsx` 에서 props 로 받아 사용한다.
+
+  - 자동완성을 지원하므로 오타같은 실수를 방지할 수 있다.
+
+  ```javascript
+  import styled from "styled-components";
+
+  const Container = styled.div`
+    background-color: ${(props) => props.theme.bgColor};
+  `;
+  const H1 = styled.h1`
+    color: ${(props) => props.theme.textColor};
+  `;
+
+  function App() {
+    return (
+      <Container>
+        <H1>Protected</H1>
+      </Container>
+    );
+  }
+
+  export default App;
+  ```
+
+### 실행결과
+
+<img src="./public/15.png" width="600" />
