@@ -49,7 +49,7 @@
      );
      ```
 
-- styled-components 설치
+- @types/styled-components 설치
 
   🚨 styled-components v6에서는 타입스크립트가 기본으로 탑재되어 있어 따로 설치 안해도 된다.  
   ( styled-components 버전은 package.json 에 나와있다. )
