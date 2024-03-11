@@ -192,7 +192,7 @@ export default App;
 - 위와 같이 `Reset CSS` 파일을 붙여 넣어주면 브라우저의 기본값이 변경된다.
 - 구글폰트, theme 도 설정해준다.
 
-#### ⚠ 경고발생 🚧
+#### ⚠ 경고발생
 
 `createGlobalStyle`에서 @import CSS 구문 사용 경고
 
@@ -915,7 +915,8 @@ React does not recognize the `isActive` prop on a DOM element 경고
 
 isActive를 `isactive`나 `$isActive`로 변경
 
-이유 : React18 이후 일관성을 높이고, 사용자 혼동을 방지하기 위해 prop의 이름은 `소문자`나 앞에 `$`가 있어야만 사용자 지정 속성으로 인식한다.  
+[ 이유 ]  
+React18 이후 일관성을 높이고, 사용자 혼동을 방지하기 위해 prop의 이름은 `소문자`나 앞에 `$`가 있어야만 사용자 지정 속성으로 인식한다.  
 `$`가 추가된 이유는 일부 라이브러리 또는 구성 요소는 대문자를 사용하는 prop을 요구하기 때문이다.
 
 ### 실행결과
