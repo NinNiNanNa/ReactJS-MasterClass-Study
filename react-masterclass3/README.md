@@ -192,6 +192,16 @@ export default App;
 - 위와 같이 `Reset CSS` 파일을 붙여 넣어주면 브라우저의 기본값이 변경된다.
 - 구글폰트, theme 도 설정해준다.
 
+#### ⚠ 경고발생 🚧
+
+`createGlobalStyle`에서 @import CSS 구문 사용 경고
+
+<img src="./public/18.png" width="600" />
+
+#### ✅ 해결방법
+
+React-helmet과 같은 라이브러리를 사용하여 일반적인 `<link>` 메타 태그를 스타일시트에 삽입하거나, index.html `<head>` 섹션에 수동으로 삽입하는 것이 좋다.
+
 ## Home part One
 
 ### 코인목록 페이지 만들기
@@ -894,6 +904,19 @@ export default Chart;
 - isActive를 priceMatch 나 chartMatch에서 받아오는데 만약 priceMatch 나 chartMatch가 null 이 아니라면(선택한 URL에 들어와있다면) true가 되고 선택한 탭은 accentColor로 변경된다.
 
   <img src="./public/15.png" width="500" />
+
+#### 🚨 문제발생
+
+React does not recognize the `isActive` prop on a DOM element 경고
+
+<img src="./public/17.png" width="600" />
+
+#### ✅ 해결방법
+
+isActive를 `isactive`나 `$isActive`로 변경
+
+이유 : React18 이후 일관성을 높이고, 사용자 혼동을 방지하기 위해 prop의 이름은 `소문자`나 앞에 `$`가 있어야만 사용자 지정 속성으로 인식한다.  
+`$`가 추가된 이유는 일부 라이브러리 또는 구성 요소는 대문자를 사용하는 prop을 요구하기 때문이다.
 
 ### 실행결과
 
