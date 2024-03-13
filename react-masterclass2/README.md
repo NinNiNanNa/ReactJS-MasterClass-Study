@@ -1,4 +1,6 @@
-# #3.0 ~ #3.7 TypeScript
+# #3 TYPESCRIPT
+
+## 3.0 Introduction
 
 > ### TypeScript
 >
@@ -16,7 +18,7 @@
 
 <img src="./public/1.png" width="600" />
 
-## Typescript 설정
+## 3.1 DefinitelyTyped
 
 1. Create React App을 타입스크립트로 시작하기(이게 제일 편함,,,)
 
@@ -63,7 +65,7 @@
   > 매우 큰 Github repository, 모든 유명한 npm 라이브러리를 가지고 있는 저장소.  
   > &nbsp;
 
-## Typing the Props
+## 3.2 Typing the Props
 
 > ### interface
 >
@@ -130,7 +132,7 @@
   export default App;
   ```
 
-## Optional Props
+## 3.3 Optional Props
 
 <img src="./public/2.png" width="500" />
 
@@ -239,7 +241,7 @@
 
 <img src="./public/7.png" width="300" />
 
-## State
+## 3.4 State
 
 <img src="./public/8.png" width="600" />
 
@@ -258,7 +260,7 @@
 > ex) `const [ value, setValue ] = useState< Value | null >(null);`  
 > &nbsp;
 
-## Forms
+## 3.5 Forms
 
 <img src="./public/10.png" width="600" />
 
@@ -304,7 +306,7 @@
 >     } = event;
 >     ```
 
-## Themes
+## 3.6 Themes
 
 [styled-components - TypeScript](https://styled-components.com/docs/api#typescript)
 
