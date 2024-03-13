@@ -4,7 +4,7 @@
 #5 에서는 V5를 사용한다. 현재(2024.03.09)까지도 V5를 많이 사용하므로 사용해도 아무 문제 없다.  
 [NPM - react-router-dom](https://www.npmjs.com/package/react-router-dom?activeTab=versions)
 
-## Setup
+## 5.0 Setup
 
 ```bash
 # React-router와 React-query 설치
@@ -93,7 +93,7 @@ npm i --save-dev @types/react-router-dom
 
     <img src="./public/2.png" width="500" />
 
-## Styles
+## 5.1 Styles
 
 > - [NPM - styled-reset](https://www.npmjs.com/package/styled-reset)
 > - [Reset CSS](https://cssdeck.com/blog/scripts/eric-meyer-reset-css/)
@@ -202,7 +202,7 @@ export default App;
 
 React-helmet과 같은 라이브러리를 사용하여 일반적인 `<link>` 메타 태그를 스타일시트에 삽입하거나, index.html `<head>` 섹션에 수동으로 삽입하는 것이 좋다.
 
-## Home part One
+## 5.2 Home part One
 
 ### 코인목록 페이지 만들기
 
@@ -336,13 +336,12 @@ root.render(
 
 <img src="./public/3.gif" width="500" />
 
-## Home part Two
+## 5.3 Home part Two
 
 ### 코인목록 페이지에 코인API 데이터 불러오기
 
-> ### coinpaprika API
+> #### [coinpaprika API](https://api.coinpaprika.com/#tag/Coins/paths/~1coins~1%7Bcoin_id%7D~1ohlcv~1latest~1/get)
 >
-> https://api.coinpaprika.com/#tag/Coins/paths/~1coins~1%7Bcoin_id%7D~1ohlcv~1latest~1/get  
 > &nbsp;
 
 ```javascript
@@ -457,7 +456,7 @@ export default Coins;
 
 5. `loading State`를 생성해 `true 일땐 "Loading..." 문구`를 보여주고 `false 일땐 코인리스트`가 보이도록 만든다. (추후 react-query로 loading 컴포넌트를 만들어줄 예정)
 
-## Route States
+## 5.4 Route States
 
 > ### 암호화폐 아이콘 API
 >
@@ -641,7 +640,7 @@ export default Coin;
 
 <img src="./public/6.gif" width="500" />
 
-## Coin Data
+## 5.5 Coin Data
 
 ### 코인상세정보 페이지에 코인정보, 코인가격정보 API 데이터 불러오기
 
@@ -712,7 +711,7 @@ export default Coin;
 
 - `infoData`와 `priceData` 데이터 출력되는지 콘솔창에서 확인 후 각각 `useState()`를 만들어 `set수정함수`에 넣어준다.
 
-## Data Types
+## 5.6 Data Types
 
 앞서 만들어준 `useState()`의 state `info`와 `priceInfo`는 타입스크립트가 빈 Object라고 생각한다.
 
@@ -754,7 +753,7 @@ export default Coin;
 > - `Shift + Alt + i` : 선택한 모든 문자열에 가장 우측 끝으로 포커싱  
 >   &nbsp;
 
-## Nested Routes part One
+## 5.7 Nested Routes part One
 
 > ### Nested router(중첩라우터)
 >
@@ -880,7 +879,7 @@ export default Chart;
 
 <img src="./public/12.gif" width="600" />
 
-## Nested Routes part Two
+## 5.8 Nested Routes part Two
 
 ### chart와 price 탭메뉴 만들기
 
