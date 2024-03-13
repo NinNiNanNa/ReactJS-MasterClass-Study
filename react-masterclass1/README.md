@@ -1,4 +1,4 @@
-# Styled Component
+# #2 STYLED COMPONENTS
 
 > ### Styled Components
 >
