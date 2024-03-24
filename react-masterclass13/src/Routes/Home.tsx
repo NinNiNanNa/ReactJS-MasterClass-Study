@@ -61,10 +61,10 @@ const Box = styled(motion.div)<{ $bgPhoto: string }>`
   background-position: center center;
   cursor: pointer;
   &:first-child {
-    transform-origin: center left;
+    /* transform-origin: center left; */
   }
   &:last-child {
-    transform-origin: center right;
+    /* transform-origin: center right; */
   }
 `;
 
@@ -97,6 +97,31 @@ const BigMovie = styled(motion.div)`
   right: 0;
   width: 40vw;
   height: 80vh;
+  border-radius: 15px;
+  background-color: ${(props) => props.theme.black.lighter};
+  overflow: hidden;
+`;
+
+const BigCover = styled.div`
+  width: 100%;
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+`;
+
+const BigTitle = styled.h3`
+  padding: 20px;
+  position: relative;
+  top: -80px;
+  font-size: 46px;
+  color: ${(props) => props.theme.black.lighter};
+`;
+
+const BigOverview = styled.p`
+  padding: 20px;
+  position: relative;
+  top: -80px;
+  color: ${(props) => props.theme.black.lighter};
 `;
 
 const rowVariants = {
@@ -115,15 +140,18 @@ const boxVariants = {
   normal: {
     scale: 1,
   },
-  hover: {
-    scale: 1.3,
+  hover: (idx: number) => ({
+    scale: 1.4,
+    // Transform origin 설정한 값이 모달창만 띄우면 원점으로 돌아와 임시방편
+    // x: ((offset - 1) / 2 - idx) * 35,
+    x: idx === 0 ? 80 : idx === 5 ? -80 : 0,
     y: -50,
     transition: {
       type: "tween",
       duration: 0.3,
       delay: 0.5,
     },
-  },
+  }),
 };
 
 const infoVariants = {
@@ -170,6 +198,10 @@ function Home() {
     history.push(`/movies/${movieId}`);
   };
   const onOverlayClicked = () => history.push("/");
+  const clickedMovie =
+    bigMovieMatch?.params.movieId &&
+    data?.results.find((movie) => movie.id === +bigMovieMatch.params.movieId);
+  console.log(clickedMovie);
 
   return (
     <Wrapper>
@@ -197,10 +229,11 @@ function Home() {
                 {data?.results
                   .slice(1)
                   .slice(offset * index, offset * index + offset)
-                  .map((movie) => (
+                  .map((movie, idx) => (
                     <Box
                       layoutId={movie.id + ""}
                       key={movie.id}
+                      custom={idx}
                       onClick={() => onBoxClicked(movie.id)}
                       variants={boxVariants}
                       initial="normal"
@@ -227,7 +260,22 @@ function Home() {
                 <BigMovie
                   layoutId={bigMovieMatch.params.movieId}
                   style={{ top: scrollY.get() + 100 }}
-                />
+                >
+                  {clickedMovie && (
+                    <>
+                      <BigCover
+                        style={{
+                          backgroundImage: `linear-gradient(to top, #232628, transparent), url(${makeImagePath(
+                            clickedMovie.backdrop_path,
+                            "w500"
+                          )})`,
+                        }}
+                      />
+                      <BigTitle>{clickedMovie.title}</BigTitle>
+                      <BigOverview>{clickedMovie.overview}</BigOverview>
+                    </>
+                  )}
+                </BigMovie>
               </>
             ) : null}
           </AnimatePresence>

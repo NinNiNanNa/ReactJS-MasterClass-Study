@@ -251,6 +251,40 @@ Box 클릭 시 영화정보를 볼 수 있는 모달창 구현하기
 
 스크롤이 어느 위치에 있어도 가운데에 모달창 띄우기
 
-[영화상세정보](https://developer.themoviedb.org/reference/movie-details)
-
 ## 9.13 Movie Modal part Three
+
+#### String 으로 형변환
+
+1. `String()` 으로 감싸기  
+   `const clickedMovie = bigMovieMatch?.params.movieId && data?.results.find(movie => String(movie.id) === bigMovieMatch.params.movieId);`
+
+2. 뒤에 `+ ""` 붙여주기  
+   `const clickedMovie = bigMovieMatch?.params.movieId && data?.results.find(movie => movie.id + "" === bigMovieMatch.params.movieId);`
+
+#### number 로 형변환
+
+1. 앞에 `+` 붙여주기  
+   `const clickedMovie = bigMovieMatch?.params.movieId && data?.results.find(movie => movie.id === +bigMovieMatch.params.movieId);`
+
+#### 모달창 영화상세정보 데이터 출력하기
+
+현재는 이미 받고 있는 API를 쓰지만 추후 더 자세한 영화정보를 위해 [영화상세정보 API](https://developer.themoviedb.org/reference/movie-details) 를 이용
+
+## 9.14 Search Redirect
+
+```bash
+npm install react-hook-form
+```
+
+`URLSerachParams` : URL에서 특정 쿼리 문자열을 가져오거나 수정할 때 사용
+
+```javascript
+const search = new URLSearchParams("?keyword=dune&region=kr");
+
+search.get("region");
+// 'kr'
+search.get("keyword");
+// 'dune'
+```
+
+[검색 API](https://developer.themoviedb.org/reference/search-multi)
